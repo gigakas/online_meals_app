@@ -2,14 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:online_meals_app/models/meal.dart';
 
 class MailDatailsScreen extends StatelessWidget {
-  const MailDatailsScreen({super.key, required this.meal});
+  const MailDatailsScreen({super.key, required this.meal, required this.onToggleFavorite});
 
   final Meal meal;
+  final void Function(Meal meal) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(meal.title)),
+      appBar: AppBar(
+        title: Text(meal.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              onToggleFavorite(meal);
+            },
+            icon: Icon(Icons.star_border_outlined),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
